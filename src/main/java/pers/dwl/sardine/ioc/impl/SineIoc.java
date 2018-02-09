@@ -18,6 +18,8 @@ import pers.dwl.sardine.util.ClassHelper;
  */
 public class SineIoc implements Ioc {
 	
+	private static final Object lock = new Object();
+	
 	/**
 	 * 实例对象集合-未完成注入
 	 */
@@ -52,7 +54,10 @@ public class SineIoc implements Ioc {
 			if(!beanMap.containsKey(clazz)){
 				throw new RuntimeException("没有该示例对象 - "+clazz);
 			}else{
-				setFiled(clazz);//依赖注入，加入缓存
+				synchronized (lock) {
+					if(!injectMap.containsKey(clazz))
+						setFiled(clazz);//依赖注入，加入缓存	
+				}
 			}
 		}
 		return (T)injectMap.get(clazz);

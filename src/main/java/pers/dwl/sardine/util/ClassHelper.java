@@ -24,7 +24,7 @@ public class ClassHelper {
 	private static Logger log = Logger.getLogger(ClassHelper.class);
 	
 	public static List<Class<?>> getClassList(){
-		return getClassList("pers.dwl.sardine.test");
+		return getClassList("pers.dwl.sardine.ioc.test");
 	}
 	
 	public static List<Class<?>> getClassList(String packageName){
